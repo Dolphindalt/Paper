@@ -1,0 +1,54 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: BuildTools <unconfigured@null.spigotmc.org>
+Date: Tue, 19 May 2020 16:35:20 +0200
+Subject: [PATCH] Added carbyne gear member to itemstack
+
+
+diff --git a/src/main/java/code/ml/CarbyneGear.java b/src/main/java/code/ml/CarbyneGear.java
+new file mode 100644
+index 0000000000000000000000000000000000000000..383a4ac7b566c030f325ab6e6637ada34121c34a
+--- /dev/null
++++ b/src/main/java/code/ml/CarbyneGear.java
+@@ -0,0 +1,4 @@
++package code.ml;
++
++public abstract class CarbyneGear {
++}
+diff --git a/src/main/java/net/minecraft/server/ItemStack.java b/src/main/java/net/minecraft/server/ItemStack.java
+index d6e43313bf0c678cf78fe77de2f8f4b6f819e3f4..ffcf3eec86bc2e3fa686dca92ebda849d9a54c00 100644
+--- a/src/main/java/net/minecraft/server/ItemStack.java
++++ b/src/main/java/net/minecraft/server/ItemStack.java
+@@ -1,5 +1,6 @@
+ package net.minecraft.server;
+ 
++import code.ml.CarbyneGear;
+ import com.google.common.collect.HashMultimap;
+ import com.google.common.collect.Multimap;
+ import com.google.gson.JsonParseException;
+@@ -62,6 +63,9 @@ public final class ItemStack {
+     private ShapeDetectorBlock l;
+     private boolean m;
+ 
++    // code ml
++    private CarbyneGear carbyneGear = null;
++
+     private static DecimalFormat H() {
+         DecimalFormat decimalformat = new DecimalFormat("#.##");
+ 
+@@ -100,6 +104,16 @@ public final class ItemStack {
+         this.checkEmpty();
+     }
+ 
++    // code ml
++
++    public CarbyneGear getCarbyneGear() {
++        return carbyneGear;
++    }
++
++    public void setCarbyneGear(final CarbyneGear carbyneGear) {
++        this.carbyneGear = carbyneGear;
++    }
++
+     // Called to run this stack through the data converter to handle older storage methods and serialized items
+     public void convertStack(int version) {
+         if (0 < version && version < CraftMagicNumbers.INSTANCE.getDataVersion()) {
